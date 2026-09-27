@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f3">
+  <meta name="description" content="Play Worm Race: Boss Fight on iPhone or Android. Eat, grow, and take on the boss.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Play Worm Race: Boss Fight">
+  <meta property="og:description" content="Eat. Grow. Beat the boss. Available on iPhone and Android.">
+  <meta property="og:image" content="https://play2games.github.io/worm-race-icon.png">
+  <meta property="og:url" content="https://play2games.github.io/play/">
+  <title>Play Worm Race: Boss Fight</title>
+  <link rel="icon" href="../worm-race-icon.png" type="image/png">
+  <style>
+    :root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #19211d; background: #f7f7f3; }
+    * { box-sizing: border-box; }
+    body { min-height: 100svh; margin: 0; display: grid; place-items: center; padding: 20px; }
+    main { width: min(100%, 420px); padding: clamp(22px, 6vw, 32px); text-align: center; background: #fff; border: 1px solid #e3e7da; border-radius: 24px; box-shadow: 0 18px 48px rgba(39, 60, 27, .07); }
+    img { display: block; width: 112px; height: 112px; margin: 0 auto 22px; object-fit: cover; border-radius: 27px; }
+    .studio { margin: 0 0 8px; color: #688a3f; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(29px, 8vw, 38px); line-height: 1.05; letter-spacing: -.06em; }
+    .tagline { margin: 15px 0 6px; font-size: 17px; font-weight: 700; }
+    .description { margin: 0 0 22px; color: #59625b; font-size: 14px; line-height: 1.55; }
+    .button { display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 13px; background: #19211d; color: #fff; font-size: 15px; font-weight: 750; text-decoration: none; }
+    .button:hover { background: #3b5631; }
+    .other { display: inline-block; margin-top: 16px; color: #526149; font-size: 13px; font-weight: 650; text-underline-offset: 4px; }
+    .status { min-height: 20px; margin: 18px 0 0; color: #697168; font-size: 12px; }
+    a:focus-visible { outline: 3px solid #83ae46; outline-offset: 4px; }
+    @media (max-width: 380px) { body { padding: 12px; } main { border-radius: 20px; } img { width: 92px; height: 92px; margin-bottom: 16px; border-radius: 23px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <img src="../worm-race-icon.png" width="512" height="512" alt="Pink worm holding a rocket">
+    <p class="studio">play2games</p>
+    <h1>Worm Race:<br>Boss Fight</h1>
+    <p class="tagline">Eat. Grow. Beat the boss.</p>
+    <p class="description">Jump into a colorful worm battle. Grab weapons, get stronger, and take down the giant boss.</p>
+    <a class="button" id="primary-store" href="https://play.google.com/store/apps/details?id=com.game.fakich.eat.run.fight">Play on Google Play ↗</a>
+    <a class="other" id="other-store" href="https://apps.apple.com/us/app/worm-race-boss-fight/id6806743400">Get it on the App Store</a>
+    <p class="status" id="status" role="status" aria-live="polite">Available on iPhone and Android</p>
+  </main>
+  <script>
+    (() => {
+      const appStore = 'https://apps.apple.com/us/app/worm-race-boss-fight/id6806743400';
+      const googlePlay = 'https://play.google.com/store/apps/details?id=com.game.fakich.eat.run.fight';
+      const agent = navigator.userAgent;
+      const iOS = /iPad|iPhone|iPod/.test(agent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const android = /Android/i.test(agent);
+      const primary = document.getElementById('primary-store');
+      const other = document.getElementById('other-store');
+      const status = document.getElementById('status');
+
+      if (iOS) {
+        primary.href = appStore;
+        primary.textContent = 'Play on the App Store ↗';
+        other.href = googlePlay;
+        other.textContent = 'Get it on Google Play';
+      }
+
+      if (!iOS && !android) return;
+      if (new URLSearchParams(location.search).has('preview')) return;
+
+      status.textContent = iOS ? 'Opening the App Store…' : 'Opening Google Play…';
+      window.setTimeout(() => location.replace(iOS ? appStore : googlePlay), 300);
+      window.setTimeout(() => { status.textContent = 'Store not open? Use the button above.'; }, 1800);
+    })();
+  </script>
+</body>
+</html>
